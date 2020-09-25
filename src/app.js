@@ -64,7 +64,10 @@ app.get('/weather', (req, res) => {
 		forecast(
 			latitude,
 			longtitude,
-			(error, { timezone_id, localtime, temperature, feelslike, weather_icons, weather_descriptions } = {}) => {
+			(
+				error,
+				{ timezone_id, localtime, temperature, feelslike, humidity, wind_speed, weather_descriptions } = {}
+			) => {
 				if (error) {
 					return res.send({ error });
 				}
@@ -75,7 +78,8 @@ app.get('/weather', (req, res) => {
 					localtime,
 					temperature,
 					feelslike,
-					weather_icons,
+					humidity,
+					wind_speed,
 					weather: weather_descriptions
 				});
 			}

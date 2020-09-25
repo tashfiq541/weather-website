@@ -7,7 +7,9 @@ const messageTwo = document.querySelector('#message-2');
 const messageThree = document.querySelector('#message-3');
 const messageFour = document.querySelector('#message-4');
 const messageFive = document.querySelector('#message-5');
+const messageSix = document.querySelector('#message-6');
 const messageSeven = document.querySelector('#message-7');
+const messageEight = document.querySelector('#message-8');
 
 weatherForm.addEventListener('submit', (e) => {
 	e.preventDefault();
@@ -18,6 +20,8 @@ weatherForm.addEventListener('submit', (e) => {
 	messageThree.textContent = '';
 	messageFour.textContent = '';
 	messageFive.textContent = '';
+	messageSix.textContent = '';
+	messageEight.textContent = '';
 	messageSeven.textContent = '';
 
 	fetch(`/weather?address=${location}`).then((response) => {
@@ -25,20 +29,14 @@ weatherForm.addEventListener('submit', (e) => {
 			if (data.error) {
 				messageOne.textContent = data.error;
 			} else {
-				// messageOne.textContent = `Location: ${data.location}`;
-				// messageTwo.textContent = `Temperature: ${data.temperature}`;
-				// messageThree.textContent = `Feelslike: ${data.feelslike}`;
-				// messageFour.textContent = `Weather Description: ${data.weatehr}`;
-				// messageFive.textContent = `Weather Description: ${data.weatehr}`;
-				// messageSix.textContent = `Weather Description: ${data.weatehr}`;
-				// messageSeven.textContent = `Weather Description: ${data.weatehr}`;
-
 				messageOne.textContent = `Location: ${data.location}`;
 				messageTwo.textContent = `timezone: ${data.timezone_id}`;
 				messageThree.textContent = `localtime: ${data.localtime}`;
 				messageFour.textContent = `Temperature: ${data.temperature} degree`;
 				messageFive.textContent = `Feelslike: ${data.feelslike} degree`;
-				messageSeven.textContent = `Weather Description: ${data.weather}`;
+				messageSix.textContent = `Humidity: ${data.humidity} %`;
+				messageSeven.textContent = `wind_speed: ${data.wind_speed} km/h`;
+				messageEight.textContent = `Weather Description: ${data.weather}`;
 			}
 		});
 	});
