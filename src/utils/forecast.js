@@ -13,9 +13,13 @@ const forecast = (latitude, longtitude, callback) => {
 		} else if (body.error) {
 			callback('Unable to find location', undefined);
 		} else {
+			console.log(body);
 			callback(undefined, {
-				temp: body.current.temperature,
+				timezone_id: body.location.timezone_id,
+				localtime: body.location.localtime,
+				temperature: body.current.temperature,
 				feelslike: body.current.feelslike,
+				weather_icons: body.current.weather_icons[0],
 				weather_descriptions: body.current.weather_descriptions[0]
 			});
 		}

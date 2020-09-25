@@ -24,7 +24,7 @@ app.use(express.static(publicDirectoryPath));
 
 app.get('', (req, res) => {
 	res.render('index', {
-		title: 'Weather App',
+		title: 'Weather',
 		header: 'Weather',
 		name: 'Tashfiq Ahmed Emon'
 	});
@@ -42,7 +42,7 @@ app.get('/help', (req, res) => {
 	res.render('help', {
 		title: 'Help Page',
 		header: 'Help',
-		msg: 'Need any help. Mail me - "tashfiqahmedemon1@gmail.com"',
+		msg: 'Need any help or query. Mail me on - "tashfiqahmedemon1@gmail.com"',
 		name: 'Tashfiq Ahmed Emon'
 	});
 });
@@ -61,18 +61,25 @@ app.get('/weather', (req, res) => {
 			});
 		}
 
-		forecast(latitude, longtitude, (error, { temp, feelslike, weather_descriptions } = {}) => {
-			if (error) {
-				return res.send({ error });
-			}
+		forecast(
+			latitude,
+			longtitude,
+			(error, { timezone_id, localtime, temperature, feelslike, weather_icons, weather_descriptions } = {}) => {
+				if (error) {
+					return res.send({ error });
+				}
 
-			res.send({
-				location: location,
-				temperature: temp,
-				feelslike: feelslike,
-				weatehr: weather_descriptions
-			});
-		});
+				res.send({
+					location,
+					timezone_id,
+					localtime,
+					temperature,
+					feelslike,
+					weather_icons,
+					weather: weather_descriptions
+				});
+			}
+		);
 	});
 });
 
